@@ -81,6 +81,9 @@ function save(){
 	Apps.udp2raw_cipher = E('_udp2raw_cipher').value;
 	Apps.udp2raw_mode = E('_udp2raw_mode').value;
 	Apps.udp2raw_server = E('_udp2raw_server').value;
+	Apps.udp2raw_secondary_enable = E('_udp2raw_secondary_enable').checked ? '1':'0';
+	Apps.udp2raw_secondary_port = E('_udp2raw_secondary_port').value;
+	Apps.udp2raw_secondary_local = E('_udp2raw_secondary_local').value;
 	if(Apps.udp2raw_server == ""){
 		alert("填写的信息不全，请检查后再提交！");
 		return false;
@@ -150,7 +153,10 @@ $('#udp2raw-fields').forms([
 { title: '程序退出保留防火墙规则', name: 'udp2raw_iptables', type: 'checkbox', value: ((Apps.udp2raw_iptables == '1')? 1:0), suffix: '开启后防火墙规则需要自己手动添加，规则不会在udp2raw退出时被删掉，可以避免停掉udp2raw后内核向对端回复RST。'},
 { title: '定期检查iptables防火墙规则', name: 'udp2raw_keep', type: 'checkbox', value: ((Apps.udp2raw_keep == '1')? 1:0), suffix: '开启后定期主动检查iptables，如果udp2raw添加的iptables规则丢了，就重新添加。'},
 { title: '绕过本地iptables', name: 'udp2raw_lower', type: 'checkbox', value: ((Apps.udp2raw_lower == '1')? 1:0), suffix: '允许绕过本地iptables，在一些iptables不好改动的情况下尤其有效'},
-{ title: '其它配置项', name: 'udp2raw_custom', type: 'text', maxlen: 250, size: 250, value: Apps.udp2raw_custom }
+{ title: '其它配置项', name: 'udp2raw_custom', type: 'text', maxlen: 250, size: 250, value: Apps.udp2raw_custom },
+{ title: '开启udp2raw第二实例', name: 'udp2raw_secondary_enable', type: 'checkbox', value: ((Apps.udp2raw_secondary_enable == '1')? 1:0)},
+{ title: '第二实例服务器端口', name: 'udp2raw_secondary_port', type: 'text', maxlen: 10, size: 10, value: Apps.udp2raw_secondary_port },
+{ title: '第二实例本地端口', name: 'udp2raw_secondary_local', type: 'text', maxlen: 10, size: 10, value: Apps.udp2raw_secondary_local || "7777"},
 ]);
 </script>
 </div>
